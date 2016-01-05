@@ -84,8 +84,6 @@ PC上，所以在PC上的串口调试助手中**发送端选择HEX发送**，**�
 正确的顺序如下
 ![流程图](/image/流程图.png)
 
-如果使用了虚拟遥控，在正常飞行中物理遥控器**不能控制飞机**。程序中可以选择失去虚拟遥控信号1s后 *降落* 或者 *切换到物理遥控*。  
-本例程中选择了失去虚拟遥控后直接降落模式。   
 
 ---
 ##动画示范
@@ -191,11 +189,9 @@ A normal order of it are as below:
 
 ![flow](image/flow.png)  
 
-If using Virtual RC,the real RC **can no control the UAV**.When losing signal of Virtual RC longer than 1s,UAV would Land or cutt off to real RC.  
-This program choose to land after losing Virtual RC  
 ---
 ###Gif Demonstration
 This little gif demonstrate how to send command using Serial debugging assistant.  
 It shows a typical command flow like:
-Read current version->Activate->Turn VRC to mode A->Turn VRC to mode F->Obtain control->Take off->Start HotPoint->GoHome->Turn VRC.  
+Read current version->Activate->Turn VRC to mode A->Turn VRC to mode F->Obtain control->Take off->GoHome.  
 ![giftest](/image/gif.gif)
