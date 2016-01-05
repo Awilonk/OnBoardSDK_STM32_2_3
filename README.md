@@ -84,13 +84,14 @@ PC上，所以在PC上的串口调试助手中**发送端选择HEX发送**，**�
 由于例程使用串口助手给飞控发送命令，使用以下格式给飞机发送姿态数据  
 
 
-0xFA 0xFB 0x04 0x01 **ctrl_flag roll_or_x_L roll_or_x_H  pitch_or_y_L pitch_or_y_H  thr_z_L thr_z_H yaw_L yaw_H** 0xFE
+0xFA 0xFB 0x04 0x01 **ctrl_flag,  roll_or_x_L,  roll_or_x_H,   pitch_or_y_L,  pitch_or_y_H,   thr_z_L,   thr_z_H,  yaw_L,  yaw_H** 0xFE
 
 
 其中每个数据用两个八位的数据组合而成。默认是整数类型int。  
 组合方式是先输入低八位，再输入高八位。  
 例如：我想输入十进制的2564到 roll_or_x.则先转化为十六进制0x0A04.然后先发送第八位0x04，再发送高八位
-0x0A。  
+0x0A。    
+即:0xFA 0xFB 0x04 0x01 0x91 **0x0A 0x04**.......0xFE  
 
 如果对数据换算不是很熟练。可以使用换算姿态数据模式。这个模式的输入逻辑和写入姿态数据的逻辑是一样的，区别是这个模式不会真的往飞机发送命令，而只是返回换算后的值供用户检验。可以把它当成一个计算器使用
 
