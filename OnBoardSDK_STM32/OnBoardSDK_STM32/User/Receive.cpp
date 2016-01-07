@@ -12,7 +12,7 @@ int Rx_Handle_Flag=0;
 extern CoreAPI *coreApi;
 extern Flight flight ;
 extern FlightData flightData ;
-
+BroadcastData broadcastdata;
 
 float Hex2int(char HighBit,char LowBit)
 {	//turn two 8-bits hex number into a signed integer,which range of-32767~32727
@@ -140,6 +140,12 @@ void Rx_buff_Handler()      //when USART recive a 0xfe,start handle command
 			if(Rx_buff[2]==0x07)             //HotPoint test    07
 			{
 				tryHotpoint();
+			}
+			if(Rx_buff[2]==0x08)             //test BroadCastData
+			{
+				broadcastdata = coreApi->getBroadcastData();
+				printf("TimeStamp is %d\r\n",broadcastdata.timeStamp);
+				printf("Battery capacity remains %d percent\r\n",broadcastdata.capacity);
 			}
 		}
 		else if(Rx_buff[1]==0xFC)   
