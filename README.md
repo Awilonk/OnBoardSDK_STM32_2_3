@@ -105,7 +105,8 @@ PC上，所以在PC上的串口调试助手中**发送端选择HEX发送**，**�
 值得注意的是，只要写入一次数据，stm32就会不断地向飞机发送之前已经写入的数据。要让stm32停止发送只要发送不是 0x04 0x01开头的命令就可以了。
 
 
-更多关于姿态控制请参看手册  
+更多关于姿态控制请参看手册    
+
 ---
 ###获取广播数据
 获取广播数据只要发送0x08就可以了。现在打印了当前的时间戳和剩余电量，需要更多数据请自行添加
@@ -136,6 +137,8 @@ Use 4-wire-serial interface.If your computer do no has one,USB-TTL serial cable 
 2. [Getting Start](#getting-start)
    - [How to operate](#how-to-operate)
    - [Command Format](#command-format)
+   - [Movement control mode](#movement-control-mode)
+   - [Get Broadcastdata](#get-broadcastdata)
    - [How to send command](#how-to-send-command)
 3. [Gif Demonstration](#gif-demonstration)
 
