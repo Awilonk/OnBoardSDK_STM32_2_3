@@ -10,8 +10,8 @@
 2. [开始使用](#开始使用)
    - [操作步骤](#操作步骤)
    - [指令格式](#指令格式)
-   - [获取广播数据](#获取广播数据)
    - [姿态控制模式](#姿态控制模式)
+   - [获取广播数据](#获取广播数据)
    - [发送指令的顺序](#发送指令的顺序)
 3. [动画示范](#动画示范)  
 
@@ -73,6 +73,7 @@ PC上，所以在PC上的串口调试助手中**发送端选择HEX发送**，**�
 |一键起飞  		 	|0xFA 0xFB 0x05 0x02 0xFE|  
 |一键降落  		 	|0xFA 0xFB 0x05 0x03 0xFE|  
 |获取广播数据 		|0xFA 0xFB 0x08  0xFE|  
+---
 ###姿态控制模式
 姿态控制模式必须在起飞后开启。  
 姿态控制模式需要用户自己向飞机发送数据。数据包括  
@@ -88,9 +89,9 @@ PC上，所以在PC上的串口调试助手中**发送端选择HEX发送**，**�
 0xFA 0xFB 0x04 0x01 **ctrl_flag,  roll_or_x_L,  roll_or_x_H,   pitch_or_y_L,  pitch_or_y_H,   thr_z_L,   thr_z_H,  yaw_L,  yaw_H** 0xFE
 
 
-其中每个数据用两个八位的数据组合而成。默认是整数类型int。  
+其中每个数据用两个八位的数据组合而成。默认是整数类型int,数据会被除以100。  
 组合方式是先输入低八位，再输入高八位。  
-例如：我想输入十进制的2564到 roll_or_x.则先转化为十六进制0x0A04.然后先发送第八位0x04，再发送高八位
+例如：输入十进制的2564到 roll_or_x.则先转化为十六进制0x0A04.然后先发送低八位0x04，再发送高八位
 0x0A。    
 即:0xFA 0xFB 0x04 0x01 0x91 **0x0A 0x04**.......0xFE  
 下面是一个示范：  
@@ -104,7 +105,8 @@ PC上，所以在PC上的串口调试助手中**发送端选择HEX发送**，**�
 值得注意的是，只要写入一次数据，stm32就会不断地向飞机发送之前已经写入的数据。要让stm32停止发送只要发送不是 0x04 0x01开头的命令就可以了。
 
 
-更多关于姿态控制请参看手册
+更多关于姿态控制请参看手册  
+---
 ###获取广播数据
 获取广播数据只要发送0x08就可以了。现在打印了当前的时间戳和剩余电量，需要更多数据请自行添加
 ![广播](/image/data.png)  
@@ -189,16 +191,34 @@ Command as below has been added to program.More command should adapter by yourse
 |Send activate information | 0xFA 0xFB 0x01 0xFE | 
 |Obtain control   		|0xFA 0xFB 0x02 0x01 0xFE|  
 |Relese control   	 	|0xFA 0xFB 0x02 0x00 0xFE | 
+|Input flight data     |0xFA 0xFB 0x04 0x01 **DATA** 0xFE|
+|Convert flight data |0xFA 0xFB 0x04 0x02 **DATA** 0xFE|
 |Return to home(RTH)|0xFA 0xFB 0x05 0x01 0xFE|  
 |Auto take off  	|0xFA 0xFB 0x05 0x02 0xFE|  
 |Auto landing  		|0xFA 0xFB 0x05 0x03 0xFE|  
+---  
+###Movement control mode
+Movement control mode can no be use before **Take off**.  
+Attitude control mode needed user sending flight data.data include:
++ Control mode byte
+- Roll or X-axis control value
+- Pitch or Y-axis control value
+- Throttle or Z-axis control value
++ Yaw control value  
+
+Since this example program use serial assistant to send cmd and data to the UAV,we use data format as below to send flight data to the UAV.  
+
+  
+0xFA 0xFB 0x04 0x01 **ctrl_flag,  roll_or_x_L,  roll_or_x_H,   pitch_or_y_L,  pitch_or_y_H,   thr_z_L,   thr_z_H,  yaw_L,  yaw_H** 0xFE
+ 
+Among this frame,every single data consist of two bytes.Default type of data is integer，raw data would be devide by 100.  
+Low byte comes first and Hight byte comes later.  
+For example:to enter 2564 to roll_or_x.First,transform to hexadecimal,which is 0xA04.
 
 
 
 
-
-
-Amoug them, 0x04 0x01 means to choose the Localpositionnacigation.  
+Among them, 0x04 0x01 means to choose the Localpositionnacigation.  
 0x91 is the Control mode byte which is choosing *VERT_POS* ，*HORI_POS* ，*YAW_RATE*， *Ground系* ，*stable mode*.  
 
 
