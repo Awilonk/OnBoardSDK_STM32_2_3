@@ -223,7 +223,8 @@ i.e. 0xFA 0xFB 0x04 0x01 0x91 **0x0A 0x04**.......0xFE
 
 Here is an example:  
 + **step 1**: Take off.![takeoff](/image/takeoff.png)  
-- **step 2**: Send out flight data that request UAV to excute. ![cmd](/image/input1.png)
+- **step 2**: Send out flight data that request UAV to excute.   
+ ![cmd](/image/input1.png)
 + **step 3**: Pay attention to the lower right corner of simulator,UAV is flying on the movement you specify.  ![flying](/image/flyaway.png)   
 
 
