@@ -89,7 +89,7 @@ PC上，所以在PC上的串口调试助手中**发送端选择HEX发送**，**�
 0xFA 0xFB 0x04 0x01 **ctrl_flag,  roll_or_x_L,  roll_or_x_H,   pitch_or_y_L,  pitch_or_y_H,   thr_z_L,   thr_z_H,  yaw_L,  yaw_H** 0xFE
 
 
-其中每个数据用两个八位的数据组合而成。默认是整数类型int,数据会被除以100。  
+其中每个数据用两个八位的数据组合而成。默认是整数类型int,数据会被除以100,负数请在最高位写1。  
 组合方式是先输入低八位，再输入高八位。  
 例如：输入十进制的2564到 roll_or_x.则先转化为十六进制0x0A04.然后先发送低八位0x04，再发送高八位
 0x0A。    
@@ -214,7 +214,7 @@ Since this example program use serial assistant to send cmd and data to the UAV,
   
 0xFA 0xFB 0x04 0x01 **ctrl_flag,  roll_or_x_L,  roll_or_x_H,   pitch_or_y_L,  pitch_or_y_H,   thr_z_L,   thr_z_H,  yaw_L,  yaw_H** 0xFE
  
-Among this frame,every single data consist of two bytes.Default type of data is integer，raw data would be devide by 100.    
+Among this frame,every single data consist of two bytes.Default type of data is integer，raw data would be devide by 100，set MSB 1 means it is a negative number.(MSB means most significant bit)    
  Low byte comes first and Hight byte comes later.  
 
 
