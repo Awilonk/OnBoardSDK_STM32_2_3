@@ -1,4 +1,4 @@
-[English](#dji-onboard-stm32-example-program) |  [中文](#dji-onboard-stm32-例程)
+	[English](#dji-onboard-stm32-example-program) |  [中文](#dji-onboard-stm32-例程)
 
 #DJI Onboard STM32 例程
 ##简介
@@ -211,26 +211,27 @@ Since this example program use serial assistant to send cmd and data to the UAV,
   
 0xFA 0xFB 0x04 0x01 **ctrl_flag,  roll_or_x_L,  roll_or_x_H,   pitch_or_y_L,  pitch_or_y_H,   thr_z_L,   thr_z_H,  yaw_L,  yaw_H** 0xFE
  
-Among this frame,every single data consist of two bytes.Default type of data is integer，raw data would be devide by 100.  
-Low byte comes first and Hight byte comes later.  
-For example:to enter 2564 to roll_or_x.First,transform to hexadecimal,which is 0xA04.
+Among this frame,every single data consist of two bytes.Default type of data is integer，raw data would be devide by 100.    
+ Low byte comes first and Hight byte comes later.  
 
 
+**e.g.**To enter 2564 to roll_or_x.First,transform to hexadecimal,which is 0xA04.Low byte 0x04 send first,high byte 0x0A comes later.  
+i.e. 0xFA 0xFB 0x04 0x01 0x91 **0x0A 0x04**.......0xFE    
+
+Here is an example:  
++ **step 1**: Take off.![takeoff](/image/takeoff.png)  
+- **step 2**: Send out flight data that request UAV to excute. ![cmd](/image/input1.png)
++ **step 3**: Pay attention to the lower right corner of simulator,UAV is flying on the movement you specify.  ![flying](/image/flyaway.png)   
 
 
-Among them, 0x04 0x01 means to choose the Localpositionnacigation.  
-0x91 is the Control mode byte which is choosing *VERT_POS* ，*HORI_POS* ，*YAW_RATE*， *Ground系* ，*stable mode*.  
+If you are unfamiliar with this data transform,a convert flight data displayer is provided.The only difference from the Input flight data mode is it would no really send out data,it just display it.You can also use it as a calculator.
 
 
-+ 0x00 0x00 is the distance of X direction is 0;
-+ 0x00 0x00 is the distance of Y direction is 0;
-+ 0x01 0xf4 is the distance of Z direction is 5.00m;
-+ 0x00 0x00 is the Yaw direction don't rotate.
-  
+It's worth noting that,once using Input flight data mode,the data you input would sequential send to the UAV.Sending a cmd start with other from 0x04 0x01 would **stop** sending data,UAV would try to stop and hover there. 
 
-
-*Attention:The input of HORI_POS is a position offset instead of an actual position. This design aims to take both GPS flight and vision-based flight into consideration. If the developer wants to use GPS navigation, the GPS information sent by the UAV can be used to calculate position offset. While in vision-based flight application, developers should have their own positioning device (along with Gudiance or GPS to provide velocity measurement) to do position control. For example, xuhao1 SDK package implements a GPS-based position control where target position can be passed as GPS coordinate.*   
-
+###Get Broadcastdata
+To get broadcastdata send back by the UAV,send cmd 0x08.Timestamp and battery capacity remain are printed now.Add more if you needed.
+![brocastdata](/image/data.png)   
 ---  
 ###How to send command  
 The command should be send in sequence.  
@@ -250,4 +251,3 @@ Read current version->Activate->Turn VRC to mode A->Turn VRC to mode F->Obtain c
 =======
 Read current version->Activate->Turn VRC to mode A->Turn VRC to mode F->Obtain control->Take off->Start HotPoint->GoHome->Turn VRC.  
 ![giftest](/image/gif.gif)
->>>>>>> c4aa4bc95a74ce337e423bccab6926e22945f2af
