@@ -102,7 +102,7 @@ PC上，所以在PC上的串口调试助手中**发送端选择HEX发送**，**�
 如果对数据换算不是很熟练。可以使用换算姿态数据模式(0x04 0x02)。这个模式的输入逻辑和写入姿态数据的逻辑是一样的，区别是这个模式不会真的往飞机发送命令，而只是返回换算后的值供用户检验。可以把它当成一个计算器使用
 
 
-值得注意的是，只要写入一次数据，stm32就会不断地向飞机发送之前已经写入的数据。要让stm32停止发送只要发送不是 0x04 0x01开头的命令就可以了。
+值得注意的是，只要写入一次数据，stm32就会不断地向飞机发送之前已经写入的数据。要让stm32停止发送只要发送不是 0x04 开头的命令就可以了。
 
 
 更多关于姿态控制请参看手册    
@@ -231,7 +231,7 @@ Here is an example:
 If you are unfamiliar with this data transform,a convert flight data displayer is provided.The only difference from the Input flight data mode is it would no really send out data,it just display it.You can also use it as a calculator.
 
 
-It's worth noting that,once using Input flight data mode,the data you input would sequential send to the UAV.Sending a cmd start with other from 0x04 0x01 would **stop** sending data,UAV would try to stop and hover there. 
+It's worth noting that,once using Input flight data mode,the data you input would sequential send to the UAV.Sending a cmd start with other from 0x04  would **stop** sending data,UAV would try to stop and hover there. 
 
 ###Get Broadcastdata
 To get broadcastdata send back by the UAV,send cmd 0x08.Timestamp and battery capacity remain are printed now.Add more if you needed.
