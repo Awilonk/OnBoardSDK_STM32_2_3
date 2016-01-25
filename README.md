@@ -151,8 +151,7 @@ Use 4-wire-serial interface.If your computer do no has one,USB-TTL serial cable 
 ##Hardware Installation
 Use USART2 for debug.PB10,PB11 as stm32's TX,RX.When connect to an external device ,link stm32-board's **Rx** to your device's **TX**.BaudRate is **115200**.BaudRate here must be **the same as** BaudRate in your Serial debugging assistant.;
 
-Use USART3 for communicating with M100.PA2,PA3 as TX,RX,which should be plug in the "USART_CAN2" prot.**"PA2"**connect to **"UART-CAN2"**'s The BaudRate here should equal to BaudRate of N1 flight control system on M100,which can be adjust on
-"DJI Assistant".
+Use USART3 for communicating with M100.PA2,PA3 as TX,RX,which should be plug in the "USART_CAN2" prot.**"PA2"**connect to **"UART-CAN2"**'s The BaudRate here should equal to BaudRate of N1 flight control system on M100,which can be adjust on "DJI Assistant".  
 ![硬件串口](image/硬件串口.png)
 ##Getting Start
 >The first connection between stm32f4 and M100 **MUST** use your mobile device and remote control.[More about activate](https://developer.dji.com/cn/onboard-sdk/documentation/ActivationGuide/)  
