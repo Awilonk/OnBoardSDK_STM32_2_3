@@ -38,7 +38,6 @@
 
 3. 用串口将PC和stm32连接起来，建议购入usb延长线、各种无线透传模块，方便调试。  
 
-本例程中所有通信方式都**已经设置为不加密**，如果需要加密，请自行配置。
 
 
 硬件正确配置后，复位stm32。如果一切正常，你将会看到M100发送回来的版本信息，此时可以向M100发送测试指令
@@ -163,7 +162,6 @@ Use USART3 for communicating with M100.PA2,PA3 as TX,RX,which should be plug in 
 2. when it's booted,connect stm32 with M100.Since there is no 3v/5v power interface on M100.**Please settle it by yourself.**Using a 26v to 5v Voltage Converter or UBEC(Ultra Battery Elimination Circuit) or ever a carrying a POWER BANK is OK.
 3. Connect stm32 with PC by serial interface.Extension cord and wireless seral port are recommened when you are doing a test.
 
-All the communication in this program **has been set to UNENCRYPTED**.If necessary,configre it in the program by yourself.
 
 If the Hardware has been set correctly,reset your stm32.If everything is ok,there would be a version infomation callback by M100.Therefrom,system is ready for your command.
 ![初始化成功](/image/初始化成功.png)
